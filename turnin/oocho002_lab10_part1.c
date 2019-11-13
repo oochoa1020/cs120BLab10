@@ -19,9 +19,6 @@ unsigned long _avr_timer_M = 1;
 unsigned long _avr_timer_cntcurr = 0;
 unsigned char threeLEDs = 0x01;
 unsigned char blinkingLED = 0x01;
-unsigned int tick1 = 0;
-unsigned int tick2 = 0;
-
 
 void TimerOn() {
 	TCCR1B = 0x0B;
@@ -64,36 +61,18 @@ void ThreeLEDsSM() {
 		
 		case light0:
 		{
-			++tick1;
-			if (tick1 == 3){
-				tick1 = 0;
-				state1 = light1;
-				break;
-			}
-			state1 = light0;
+			state1 = light1;
 			break;
 		}
 		case light1:
-		{	
-			++tick1;
-			if (tick1 == 3) {
-				tick1 = 0;
-				state1 = light2;
-				break;
-			}
-			state1 = light1;
-            break;
+		{		
+			state1 = light2;
+                        break;
 		}
 		case light2:
 		{
-			++tick1;
-			if (tick1 == 3) {
-				tick1 = 0;
-				state1 = light0;
-				break;
-			}
-			state1 = light2;
-			break;
+			state1 = light0;
+                        break;
 		}
 		default:
 		{
@@ -125,24 +104,12 @@ void BlinkingLEDSM() {
 		
 		case off:
 		{
-			++tick2;
-			if (tick2 == 10){
-				tick2 = 0;
-				state2 = on;
-				break;
-			}
-			state2 = off;
+			state2 = on;
 			break;
 		}
 		case on:
 		{
-			++tick2;
-			if (tick2 == 10){
-				tick2 = 0;
-				state2 = off;
-				break;
-			}
-			state2 = on;
+			state2 = off;
 			break;
 		}
 		default:
@@ -192,7 +159,7 @@ int main(void) {
 	state1 = light0;
 	state2 = off;
 	state3 = combine;
-	TimerSet(100);
+	TimerSet(1000);
 	TimerOn();
 	while(1) {
 		ThreeLEDsSM();
