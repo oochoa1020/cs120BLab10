@@ -1,0 +1,7 @@
+Breakpoint 1 at 0x320: file source/main.c, line 147.
+Note: automatically using hardware breakpoints for read-only addresses.
+======================================================
+Running all tests..."
+
+"1 second :  PORTB: 0x02”..."2 second  PINA = 0x01 =>  PORTB: 0x02”..."5 second  PINA = 0x01;0x00;0x01 =>  State: light0,light1,wait,restart,light1”...test/tests.gdb:49: Error in sourced command file:
+Remote communication error.  Target disconnected.: Connection reset by peer.
